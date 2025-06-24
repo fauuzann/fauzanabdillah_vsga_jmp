@@ -1,5 +1,7 @@
 package com.fauzana0133.kampuskuvsga.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -7,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.fauzana0133.kampuskuvsga.screen.*
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun AppNavigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screen.Splash.route) {
@@ -29,6 +32,11 @@ fun AppNavigation(navController: NavHostController) {
         composable(Screen.Info.route) {
             Text("Informasi Aplikasi - Coming Soon")
         }
+
+        composable(Screen.ListMahasiswa.route) {
+            ListMahasiswaScreen(navController)
+        }
+
 
     }
 }
