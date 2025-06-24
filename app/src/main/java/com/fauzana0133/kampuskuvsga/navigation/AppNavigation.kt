@@ -39,6 +39,9 @@ fun AppNavigation(
             val id = backStackEntry.arguments?.getString("id")?.toIntOrNull()
             InputMahasiswaScreen(navController, mahasiswaViewModel, id) //
         }
+        composable(Screen.Info.route) {
+            InfoScreen()
+        }
     }
 }
 
