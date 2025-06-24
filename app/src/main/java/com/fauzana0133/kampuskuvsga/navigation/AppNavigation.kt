@@ -1,5 +1,6 @@
 package com.fauzana0133.kampuskuvsga.navigation
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -18,5 +19,16 @@ fun AppNavigation(navController: NavHostController) {
         composable(Screen.Dashboard.route) {
             DashboardScreen(navController)
         }
+
+        composable(Screen.ListMahasiswa.route) {
+            Text("List Mahasiswa - Coming Soon")
+        }
+        composable(Screen.InputMahasiswa.route) {
+            Text("Input Mahasiswa - Coming Soon")
+        }
+        composable(Screen.Info.route) {
+            Text("Informasi Aplikasi - Coming Soon")
+        }
+
     }
 }
