@@ -27,12 +27,16 @@ import com.fauzana0133.kampuskuvsga.viewmodel.MahasiswaViewModel
 @Composable
 fun InputMahasiswaScreen(
     navController: NavController,
-    viewModel: MahasiswaViewModel = viewModel()
+    viewModel: MahasiswaViewModel = viewModel(),
+    id: Int? = null
 ) {
-    var nama by remember { mutableStateOf("") }
-    var nim by remember { mutableStateOf("") }
-    var jurusan by remember { mutableStateOf("") }
+    val existing = id?.let { viewModel.getMahasiswaById(it) }
+
+    var nama by remember { mutableStateOf(existing?.nama ?: "") }
+    var nim by remember { mutableStateOf(existing?.nim ?: "") }
+    var jurusan by remember { mutableStateOf(existing?.jurusan ?: "") }
     var showError by remember { mutableStateOf(false) }
+
 
     Scaffold(
         topBar = {
@@ -71,8 +75,12 @@ fun InputMahasiswaScreen(
             Button(
                 onClick = {
                     if (nama.isNotBlank() && nim.isNotBlank() && jurusan.isNotBlank()) {
-                        viewModel.tambahMahasiswa(nama, nim, jurusan)
-                        navController.popBackStack() // kembali ke List
+                        if (id != null) {
+                            viewModel.updateMahasiswa(id, nama, nim, jurusan)
+                        } else {
+                            viewModel.tambahMahasiswa(nama, nim, jurusan)
+                        }
+                        navController.popBackStack()
                     } else {
                         showError = true
                     }

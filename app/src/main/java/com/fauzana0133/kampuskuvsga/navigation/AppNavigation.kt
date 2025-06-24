@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.fauzana0133.kampuskuvsga.screen.*
 import com.fauzana0133.kampuskuvsga.viewmodel.MahasiswaViewModel
 
@@ -28,8 +29,15 @@ fun AppNavigation(
         composable(Screen.ListMahasiswa.route) {
             ListMahasiswaScreen(navController, mahasiswaViewModel)
         }
-        composable(Screen.InputMahasiswa.route) {
-            InputMahasiswaScreen(navController, mahasiswaViewModel)
+        composable(
+            route = "${Screen.InputMahasiswa.route}?id={id}",
+            arguments = listOf(navArgument("id") {
+                nullable = true
+                defaultValue = null
+            })
+        ) { backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+            InputMahasiswaScreen(navController, mahasiswaViewModel, id) //
         }
     }
 }

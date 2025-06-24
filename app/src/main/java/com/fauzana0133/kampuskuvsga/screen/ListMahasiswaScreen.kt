@@ -73,7 +73,6 @@ fun ListMahasiswaScreen(
                 }
             }
 
-            // Dialog Aksi
             if (showDialog && selectedId != null) {
                 AlertDialog(
                     onDismissRequest = { showDialog = false },
