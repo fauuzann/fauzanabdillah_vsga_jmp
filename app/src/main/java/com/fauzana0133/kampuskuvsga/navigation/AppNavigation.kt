@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.fauzana0133.kampuskuvsga.screen.*
-import com.fauzana0133.kampuskuvsga.viewmodel.MahasiswaViewModel
+import com.fauzana0133.kampuskuvsga.model.MahasiswaViewModel
 
 @RequiresApi(Build.VERSION_CODES.N)
 @Composable
@@ -40,7 +40,7 @@ fun AppNavigation(
             InputMahasiswaScreen(navController, mahasiswaViewModel, id) //
         }
         composable(Screen.Info.route) {
-            InfoScreen()
+            InfoScreen(navController)
         }
     }
 }

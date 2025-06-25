@@ -1,10 +1,9 @@
-package com.fauzana0133.kampuskuvsga.viewmodel
+package com.fauzana0133.kampuskuvsga.model
 
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
-import com.fauzana0133.kampuskuvsga.model.Mahasiswa
 
 class MahasiswaViewModel : ViewModel() {
     private var nextId = 1

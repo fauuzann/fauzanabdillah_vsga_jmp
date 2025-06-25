@@ -10,7 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.fauzana0133.kampuskuvsga.navigation.AppNavigation
 import com.fauzana0133.kampuskuvsga.ui.theme.KampusKuVSGATheme
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.fauzana0133.kampuskuvsga.viewmodel.MahasiswaViewModel
+import com.fauzana0133.kampuskuvsga.model.MahasiswaViewModel
 
 
 class MainActivity : ComponentActivity() {

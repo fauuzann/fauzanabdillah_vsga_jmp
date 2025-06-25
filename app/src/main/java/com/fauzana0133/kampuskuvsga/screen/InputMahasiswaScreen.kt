@@ -1,27 +1,17 @@
 package com.fauzana0133.kampuskuvsga.screen
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.fauzana0133.kampuskuvsga.viewmodel.MahasiswaViewModel
+import com.fauzana0133.kampuskuvsga.model.MahasiswaViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,16 +27,32 @@ fun InputMahasiswaScreen(
     var jurusan by remember { mutableStateOf(existing?.jurusan ?: "") }
     var showError by remember { mutableStateOf(false) }
 
-
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Input Data Mahasiswa") })
+            TopAppBar(
+                title = {
+                    Text(
+                        text = if (id != null) "Edit Mahasiswa" else "Input Mahasiswa",
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Kembali", tint = MaterialTheme.colorScheme.onPrimary)
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
+            )
         }
+
     ) { inner ->
         Column(
             modifier = Modifier
                 .padding(inner)
-                .padding(16.dp)
+                .fillMaxSize()
+                .background(Color(0xFFE8F5E9))
+                .padding(24.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             OutlinedTextField(
                 value = nama,
@@ -54,7 +60,6 @@ fun InputMahasiswaScreen(
                 label = { Text("Nama") },
                 modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(
                 value = nim,
@@ -62,7 +67,6 @@ fun InputMahasiswaScreen(
                 label = { Text("NIM") },
                 modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(
                 value = jurusan,
@@ -70,7 +74,6 @@ fun InputMahasiswaScreen(
                 label = { Text("Jurusan") },
                 modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(24.dp))
 
             Button(
                 onClick = {
@@ -85,15 +88,15 @@ fun InputMahasiswaScreen(
                         showError = true
                     }
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
             ) {
-                Text("Simpan")
+                Text("Simpan", color = Color.White)
             }
 
             if (showError) {
-                Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    "Semua field harus diisi!",
+                    text = "Semua field harus diisi!",
                     color = MaterialTheme.colorScheme.error
                 )
             }

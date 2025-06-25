@@ -1,12 +1,16 @@
 package com.fauzana0133.kampuskuvsga.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.fauzana0133.kampuskuvsga.navigation.Screen
 
@@ -19,13 +23,20 @@ fun LoginScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color(0xFFE8F5E9)) // 💚 hijau soft
             .padding(32.dp),
         contentAlignment = Alignment.Center
     ) {
-        Column {
-            Text(text = "Login", style = MaterialTheme.typography.headlineMedium)
-
-            Spacer(modifier = Modifier.height(24.dp))
+        Column(
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Selamat Datang",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF388E3C)
+            )
 
             OutlinedTextField(
                 value = username,
@@ -33,8 +44,6 @@ fun LoginScreen(navController: NavController) {
                 label = { Text("Username") },
                 modifier = Modifier.fillMaxWidth()
             )
-
-            Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(
                 value = password,
@@ -44,11 +53,9 @@ fun LoginScreen(navController: NavController) {
                 visualTransformation = PasswordVisualTransformation()
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
-
             Button(
                 onClick = {
-                    if (username == "ozan" && password == "1234") {
+                    if (username == "admin" && password == "123") {
                         showError = false
                         navController.navigate(Screen.Dashboard.route) {
                             popUpTo(Screen.Login.route) { inclusive = true }
@@ -57,15 +64,15 @@ fun LoginScreen(navController: NavController) {
                         showError = true
                     }
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
             ) {
-                Text("Login")
+                Text("Login", color = Color.White)
             }
 
             if (showError) {
-                Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Username atau password salah!",
+                    text = "Username atau password salah",
                     color = MaterialTheme.colorScheme.error
                 )
             }
